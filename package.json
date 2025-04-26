@@ -2,7 +2,7 @@
   "name": "prgpt",
   "displayName": "Prgpt",
   "version": "0.0.1",
-  "description": "PrGPT is an AI-powered tool that generates smart, concise pull request titles and descriptions based on your commit messages. Say goodbye to writing dull PR summaries — PrGPT does the talking for your code.",
+  "description": "PrGPT generates smart, concise pull request titles and descriptions from commits — no more dull summaries, just clear PRs.",
   "author": "Muhsin Abdul Nisar",
   "scripts": {
     "dev": "plasmo dev",
