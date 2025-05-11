@@ -1,7 +1,7 @@
 import axios from "~node_modules/axios"
 
 const axiosInstance = axios.create({
-  baseURL: process.env.PLASMO_PUBLIC_BACKEND_URL,
+  baseURL: "https://prgpt-api.onrender.com",
   headers: {
     "Content-Type": "application/json"
   }

@@ -124,7 +124,7 @@ function IndexPopup(): JSX.Element {
   ): Promise<void> => {
     try {
       const response = await axiosInstance.post(
-        `${process.env.PLASMO_PUBLIC_BACKEND_URL}/api/pr/generate-title-description`,
+        `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
         JSON.stringify({ commits: commitMessages })
       )
 
