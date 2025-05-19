@@ -1,4 +1,3 @@
-````markdown
 # PrGPT - AI Powered Pull Request Title and Description Generator
 
 PrGPT is a web extension that automatically generates titles and descriptions for your GitHub Pull Requests with the help of AI. Built using the [Plasmo Framework](https://www.plasmo.com/), PrGPT integrates seamlessly into your workflow, helping you write better PRs faster.
@@ -30,6 +29,7 @@ PrGPT is a web extension that automatically generates titles and descriptions fo
 git clone https://github.com/Muhsin-42/prgpt.git
 cd prgpt
 ```
+
 ````
 
 ### 2. Install dependencies
@@ -62,3 +62,4 @@ MIT License. See `LICENSE` for details.
 # 🙌 Contributions
 
 Contributions, issues, and feature requests are welcome! Feel free to open a pull request or submit an issue.
+````
