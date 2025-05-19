@@ -1,16 +1,3 @@
-Alright, you're building something _super_ useful — an AI-powered PR title and description generator using Plasmo!  
-Let’s set you up properly. Here's a **brief description** for your repo and a **starter README.md** you can use:
-
----
-
-# Repo Description
-
-> **PrGPT** is a browser extension built with the Plasmo framework that uses AI to generate clear, concise Pull Request titles and descriptions. Save time and improve your PR documentation instantly — directly from GitHub!
-
----
-
-# README.md
-
 ````markdown
 # PrGPT - AI Powered Pull Request Title and Description Generator
 
@@ -75,13 +62,3 @@ MIT License. See `LICENSE` for details.
 # 🙌 Contributions
 
 Contributions, issues, and feature requests are welcome! Feel free to open a pull request or submit an issue.
-
----
-
-```
-
----
-
-Would you also want me to help you quickly write a **short tagline** and **GitHub topics/tags** for the repo to make it more discoverable? 🚀
-(Like "ai", "chrome-extension", "github-pr", etc.)
-```
