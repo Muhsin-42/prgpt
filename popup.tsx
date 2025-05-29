@@ -46,7 +46,7 @@ function IndexPopup(): JSX.Element {
     try {
       const commitMessages = await fetchCommitMessagesFromPage()
       if (commitMessages.length > 0) {
-        await generateTitleDescription(commitMessages)
+        await generateTitleDescription(commitMessages, currentUrl)
       } else {
         setPrDetails({
           title: "Could not generate title",
@@ -120,12 +120,13 @@ function IndexPopup(): JSX.Element {
   }
 
   const generateTitleDescription = async (
-    commitMessages: string[]
+    commitMessages: string[],
+    currentUrl: string
   ): Promise<void> => {
     try {
       const response = await axiosInstance.post(
         `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
-        JSON.stringify({ commits: commitMessages })
+        JSON.stringify({ commits: commitMessages, currentUrl })
       )
 
       const responseData = await response.data
