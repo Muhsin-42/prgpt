@@ -20,7 +20,7 @@ const Header: React.FC = () => {
           href="https://github.com/Muhsin-42"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full shadow-md hover:bg-gray-900 transition-colors duration-200"
           aria-label="GitHub profile">
           <svg
             className="w-5 h-5"
@@ -33,6 +33,7 @@ const Header: React.FC = () => {
               clipRule="evenodd"
             />
           </svg>
+          <span className="text-sm font-semibold tracking-wide">Muhsin-42</span>
         </a>
 
         {/* Theme Toggle Button */}

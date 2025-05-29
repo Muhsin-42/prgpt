@@ -4,6 +4,8 @@ import React from "react"
 // import GenerateButton from "./GenerateButton"
 import GenerateButton from "./GenerateButton"
 import PrResult from "./PrResult"
+import StarOnGithubBtn from "./StarOnGithubBtn"
+import { Button } from "./ui/button"
 
 interface PrDetails {
   title: string
@@ -48,9 +50,14 @@ const GithubPrContent: React.FC<GithubPrContentProps> = ({
                 strokeWidth="2"
                 d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
             </svg>
+
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Click generate to create a pull request with AI
             </p>
+          </div>
+
+          <div className="mb-2">
+            <StarOnGithubBtn />
           </div>
           <GenerateButton onClick={onGenerate} isLoading={isLoading} />
         </div>

@@ -1,6 +1,8 @@
 // src/components/NotPrPageWarning.tsx
 import React from "react"
 
+import StarOnGithubBtn from "./StarOnGithubBtn"
+
 const NotPrPageWarning: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center py-8 text-center">
@@ -23,11 +25,14 @@ const NotPrPageWarning: React.FC = () => {
         <p className="text-sm">
           Please navigate to a GitHub pull request creation page to use PrGPT.
         </p>
+        <div className="mt-4 flex items-center justify-center">
+          <StarOnGithubBtn />
+        </div>
       </div>
 
       <div className="mt-4 max-w-md">
-        <h4 className="font-medium text-sm mb-2">How to use PrGPT:</h4>
-        <ol className="text-left text-sm space-y-2 text-gray-700 dark:text-gray-300">
+        <h4 className="font-medium text-lg mb-2">How to use PrGPT:</h4>
+        <ol className="text-left text-sm space-y-2 text-gray-400 dark:text-gray-400">
           <li>1. Navigate to your GitHub repository</li>
           <li>2. Click on "Pull requests" tab</li>
           <li>3. Click "New pull request"</li>

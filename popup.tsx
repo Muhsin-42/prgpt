@@ -9,6 +9,11 @@ import LoadingOverlay from "~components/LoadingOverlay"
 import NotPrPageWarning from "~components/NotPrPageWarning"
 import { ThemeProvider } from "~components/ThemeContext"
 import axiosInstance from "~lib/axios-instance"
+import {
+  fetchCommitMessagesFromPage,
+  fetchUsernameFromPage,
+  fillPrForm
+} from "~lib/helpers"
 
 interface PrDetails {
   title: string
@@ -45,8 +50,10 @@ function IndexPopup(): JSX.Element {
     setIsLoading(true)
     try {
       const commitMessages = await fetchCommitMessagesFromPage()
+      const username = await fetchUsernameFromPage()
+
       if (commitMessages.length > 0) {
-        await generateTitleDescription(commitMessages, currentUrl)
+        await generateTitleDescription(commitMessages, currentUrl, username)
       } else {
         setPrDetails({
           title: "Could not generate title",
@@ -66,67 +73,15 @@ function IndexPopup(): JSX.Element {
     }
   }
 
-  const fetchCommitMessagesFromPage = (): Promise<string[]> => {
-    return new Promise((resolve, reject) => {
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const tabId = tabs[0]?.id
-
-        if (!tabId) {
-          reject(new Error("Could not access the current tab."))
-          return
-        }
-
-        chrome.scripting.executeScript(
-          {
-            target: { tabId: tabId },
-            func: (): string[] => {
-              try {
-                // Find all commit list items
-                const commitItems = document.querySelectorAll<HTMLElement>(
-                  "#commits_bucket .js-commits-list-item"
-                )
-                const messages: string[] = []
-
-                // Extract the commit message from each item
-                commitItems.forEach((item) => {
-                  const messageParagraph = item.querySelector<HTMLElement>(
-                    ".js-details-container p"
-                  )
-                  if (messageParagraph) {
-                    let message = messageParagraph.textContent?.trim() || ""
-                    if (message) {
-                      messages.push(message)
-                    }
-                  }
-                })
-
-                return messages
-              } catch (error) {
-                console.error("Error fetching commit messages:", error)
-                return []
-              }
-            }
-          },
-          (results) => {
-            if (results && results[0]?.result) {
-              resolve(results[0].result as string[])
-            } else {
-              resolve([])
-            }
-          }
-        )
-      })
-    })
-  }
-
   const generateTitleDescription = async (
     commitMessages: string[],
-    currentUrl: string
+    currentUrl: string,
+    username: string | undefined
   ): Promise<void> => {
     try {
       const response = await axiosInstance.post(
         `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
-        JSON.stringify({ commits: commitMessages, currentUrl })
+        JSON.stringify({ commits: commitMessages, currentUrl, username })
       )
 
       const responseData = await response.data
@@ -149,28 +104,6 @@ function IndexPopup(): JSX.Element {
       console.error("Error generating title and description:", error)
       throw error
     }
-  }
-
-  const fillPrForm = (title: string, description: string): void => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const tabId = tabs[0]?.id
-      if (!tabId) return
-
-      chrome.scripting.executeScript({
-        target: { tabId },
-        func: (title: string, description: string): void => {
-          const titleInput = document.querySelector<HTMLInputElement>(
-            "#pull_request_title"
-          )
-          const bodyTextarea =
-            document.querySelector<HTMLTextAreaElement>("#pull_request_body")
-
-          if (titleInput) titleInput.value = title
-          if (bodyTextarea) bodyTextarea.value = description
-        },
-        args: [title, description]
-      })
-    })
   }
 
   return (
