@@ -1,122 +1,29 @@
-// src/components/PrResult.tsx
-import DOMPurify from "dompurify"
-import { marked } from "marked"
-import React, { useState } from "react"
+import React from "react"
 
-interface PrDetails {
-  title: string
-  description: string
-}
-
-interface PrResultProps {
-  prDetails: PrDetails
-}
-
-const PrResult: React.FC<PrResultProps> = ({ prDetails }) => {
-  const [copyTitleStatus, setCopyTitleStatus] = useState<string>("")
-  const [copyDescStatus, setCopyDescStatus] = useState<string>("")
-
-  const copyToClipboard = (
-    text: string,
-    type: "title" | "description"
-  ): void => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        if (type === "title") {
-          setCopyTitleStatus("Copied!")
-          setTimeout(() => setCopyTitleStatus(""), 2000)
-        } else {
-          setCopyDescStatus("Copied!")
-          setTimeout(() => setCopyDescStatus(""), 2000)
-        }
-      })
-      .catch((error) => {
-        console.error("Copy failed:", error)
-        if (type === "title") {
-          setCopyTitleStatus("Failed to copy")
-          setTimeout(() => setCopyTitleStatus(""), 2000)
-        } else {
-          setCopyDescStatus("Failed to copy")
-          setTimeout(() => setCopyDescStatus(""), 2000)
-        }
-      })
-  }
-
-  // Safe markdown conversion
-  const markdownToHtml = async (markdown: string): Promise<string> => {
-    try {
-      const rawHtml = await marked(markdown)
-      return DOMPurify.sanitize(rawHtml)
-    } catch (error) {
-      console.error("Error converting markdown:", error)
-      return markdown // Return plain text if conversion fails
-    }
-  }
-
+const PrResult: React.FC = () => {
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
-      <div className="mb-4">
-        <div className="flex justify-between items-center mb-2">
-          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Title
-          </h4>
-          <button
-            onClick={() => copyToClipboard(prDetails.title, "title")}
-            className="text-xs text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center"
-            aria-label="Copy title to clipboard">
-            <svg
-              className="w-3 h-3 mr-1"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path>
-              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path>
-            </svg>
-            {copyTitleStatus || "Copy"}
-          </button>
-        </div>
-        <div className="bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded p-2 text-sm break-all border border-gray-200 dark:border-gray-600">
-          {prDetails.title || "No title generated"}
-        </div>
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-lg p-6 mx-5 my-6 text-center border border-gray-700">
+      <h2 className="text-xl font-bold mb-3 text-purple-400">
+        Pull Request Created 🎉
+      </h2>
+      <p className="text-sm text-gray-300 mb-6">
+        Your pull request has been successfully generated and placed on GitHub.
+        <br />
+        You can now close this extension.
+      </p>
+
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={() => window.close()}
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
+          Close Extension
+        </button>
       </div>
 
-      <div>
-        <div className="flex justify-between items-center mb-2">
-          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Description
-          </h4>
-          <button
-            onClick={() =>
-              copyToClipboard(prDetails.description, "description")
-            }
-            className="text-xs text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center"
-            aria-label="Copy description to clipboard">
-            <svg
-              className="w-3 h-3 mr-1"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path>
-              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path>
-            </svg>
-            {copyDescStatus || "Copy"}
-          </button>
-        </div>
-        <div className="bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded p-3 text-sm overflow-y-auto max-h-48 border border-gray-200 dark:border-gray-600 markdown-content">
-          {prDetails.description ? (
-            <span>{prDetails.description}</span>
-          ) : (
-            "No description generated"
-          )}
-        </div>
-      </div>
-
-      <div className="mt-4 flex justify-center">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Generated by PrGPT using advanced AI
-        </p>
-      </div>
+      <p className="text-xs text-gray-500 mt-6">
+        Powered by <span className="text-purple-400 font-semibold">PrGPT</span>{" "}
+        🚀
+      </p>
     </div>
   )
 }

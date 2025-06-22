@@ -14,7 +14,7 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 
+      className="bg-gradient-to-r !z-50 from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 
                 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg 
                 transition-all duration-200 flex items-center justify-center w-48
                 disabled:opacity-70 disabled:cursor-not-allowed"

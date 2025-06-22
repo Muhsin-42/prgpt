@@ -7,10 +7,11 @@ const Header: React.FC = () => {
   const { darkMode, toggleTheme } = useTheme()
 
   return (
+    // <header className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
     <header className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
       <div className="flex items-center">
         <div className="text-gradient font-bold text-2xl mr-2">PrGPT</div>
-        <span className="text-xs text-black bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-full">
+        <span className="text-xs text-black BG-gray-200 dark:BG-gray-700 px-2 py-1 rounded-full">
           AI Powered
         </span>
       </div>
@@ -20,7 +21,7 @@ const Header: React.FC = () => {
           href="https://github.com/Muhsin-42"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full shadow-md hover:bg-gray-900 transition-colors duration-200"
+          className="inline-flex items-center gap-2 px-4 py-2 BG-black text-white rounded-full shadow-md hover:BG-gray-900 transition-colors duration-200"
           aria-label="GitHub profile">
           <svg
             className="w-5 h-5"
@@ -39,7 +40,7 @@ const Header: React.FC = () => {
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="p-2 rounded-full hover:BG-gray-200 dark:hover:BG-gray-700"
           aria-label="Toggle theme">
           {darkMode ? (
             <svg

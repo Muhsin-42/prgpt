@@ -108,22 +108,27 @@ function IndexPopup(): JSX.Element {
 
   return (
     <ThemeProvider>
-      <div className="app-container min-h-[400px]">
-        <Header />
-        <div className="p-4">
-          {!isPrPage ? (
-            <NotPrPageWarning />
-          ) : (
-            <GithubPrContent
-              isGenerated={isGenerated}
-              isLoading={isLoading}
-              prDetails={prDetails}
-              onGenerate={generatePr}
-            />
-          )}
-        </div>
+      <div className="relative h-full w-full bg-[#000000] ">
+        <div className="app-container min-h-[400px] !z-10">
+          <Header />
 
-        {isLoading && <LoadingOverlay />}
+          <div className="">
+            {!isPrPage ? (
+              <NotPrPageWarning />
+            ) : (
+              <GithubPrContent
+                isGenerated={isGenerated}
+                isLoading={isLoading}
+                prDetails={prDetails}
+                onGenerate={generatePr}
+              />
+            )}
+          </div>
+
+          {isLoading && <LoadingOverlay />}
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#ffffff33_1px,transparent_1px),linear-gradient(to_bottom,#ffffff33_1px,transparent_1px)] bg-[size:6rem_4rem] "></div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(45deg,_rgba(255,255,255,0)_41%,_rgba(12,2,40,1)_95%)]"></div>
       </div>
     </ThemeProvider>
   )
