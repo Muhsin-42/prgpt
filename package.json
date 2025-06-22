@@ -1,7 +1,7 @@
 {
   "name": "prgpt",
   "displayName": "Prgpt",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "PrGPT generates smart, concise pull request titles and descriptions from commits — no more dull summaries, just clear PRs.",
   "author": "Muhsin Abdul Nisar",
   "scripts": {
@@ -42,7 +42,8 @@
     "permissions": [
       "tabs",
       "activeTab",
-      "scripting"
+      "scripting",
+      "contextMenus"
     ]
   },
   "compilerOptions": {
@@ -58,6 +59,9 @@
       ],
       "js": [
         "content.ts"
+      ],
+      "css": [
+        "content.css"
       ]
     }
   ]
