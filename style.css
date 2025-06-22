@@ -70,9 +70,10 @@ body {
 .app-container {
   width: 500px;
   min-height: 400px;
-  background-color: var(--color-bg);
+  /* background-color: var(--color-bg); */
   color: var(--color-text);
   position: relative;
+  z-index: 999;
 }
 
 /* Text Gradient styles for PrGPT title */

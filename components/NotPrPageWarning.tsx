@@ -5,7 +5,7 @@ import StarOnGithubBtn from "./StarOnGithubBtn"
 
 const NotPrPageWarning: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-8 text-center">
+    <div className="flex flex-col items-center !z-10 justify-center py-8 text-center">
       <div className="bg-yellow-100 dark:bg-amber-900/30 p-6 rounded-lg mb-4 text-yellow-800 dark:text-yellow-200 max-w-md">
         <svg
           className="w-12 h-12 mx-auto mb-4 text-yellow-500"

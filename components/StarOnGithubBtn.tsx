@@ -7,7 +7,7 @@ export default function StarOnGithub() {
   return (
     <Button
       variant="default"
-      className="bg-black hover:bg-gray-900 text-white font-medium !py-4 px-6 rounded-lg shadow-md hover:shadow-lg 
+      className="bg-black border border-gray-600 !z-50 hover:bg-gray-900 text-white font-medium !py-4 px-6 rounded-lg shadow-md hover:shadow-lg 
         transition-all duration-200 flex items-center justify-center w-48 disabled:opacity-70 disabled:cursor-not-allowed "
       size="lg">
       <a

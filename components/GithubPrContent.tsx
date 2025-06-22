@@ -5,7 +5,6 @@ import React from "react"
 import GenerateButton from "./GenerateButton"
 import PrResult from "./PrResult"
 import StarOnGithubBtn from "./StarOnGithubBtn"
-import { Button } from "./ui/button"
 
 interface PrDetails {
   title: string
@@ -26,10 +25,12 @@ const GithubPrContent: React.FC<GithubPrContentProps> = ({
   onGenerate
 }) => {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full !z-10">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-2">GitHub Pull Request</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <h3 className="text-lg font-semibold mb-2 px-5 pt-3">
+          GitHub Pull Request
+        </h3>
+        <p className="text-sm text-gray-400 dark:text-gray-400 px-5">
           Generate a professional pull request title and description based on
           your commit messages.
         </p>
@@ -62,7 +63,7 @@ const GithubPrContent: React.FC<GithubPrContentProps> = ({
           <GenerateButton onClick={onGenerate} isLoading={isLoading} />
         </div>
       ) : (
-        <PrResult prDetails={prDetails} />
+        <PrResult />
       )}
     </div>
   )
