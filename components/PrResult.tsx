@@ -1,6 +1,10 @@
 import React from "react"
 
-const PrResult: React.FC = () => {
+interface PrResultProps {
+  onGenerate: () => void
+}
+
+const PrResult: React.FC<PrResultProps> = ({ onGenerate }) => {
   return (
     <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-lg p-6 mx-5 my-6 text-center border border-gray-700">
       <h2 className="text-xl font-bold mb-3 text-purple-400">
@@ -12,11 +16,17 @@ const PrResult: React.FC = () => {
         You can now close this extension.
       </p>
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 gap-4">
         <button
           onClick={() => window.close()}
           className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
           Close Extension
+        </button>
+        {/* Regenerate Button */}
+        <button
+          onClick={onGenerate}
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
+          Regenerate PR
         </button>
       </div>
 

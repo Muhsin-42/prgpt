@@ -63,7 +63,7 @@ const GithubPrContent: React.FC<GithubPrContentProps> = ({
           <GenerateButton onClick={onGenerate} isLoading={isLoading} />
         </div>
       ) : (
-        <PrResult />
+        <PrResult onGenerate={onGenerate} />
       )}
     </div>
   )

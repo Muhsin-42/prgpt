@@ -73,6 +73,39 @@ function IndexPopup(): JSX.Element {
     }
   }
 
+  // const generateTitleDescription = async (
+  //   commitMessages: string[],
+  //   currentUrl: string,
+  //   username: string | undefined
+  // ): Promise<void> => {
+  //   try {
+  //     const response = await axiosInstance.post(
+  //       `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
+  //       JSON.stringify({ commits: commitMessages, currentUrl, username })
+  //     )
+
+  //     const responseData = await response.data
+  //     console.log({ response: responseData })
+
+  //     const rawJsonString = responseData?.data?.description
+  //       ?.replace(/^```json\n/, "") // Remove opening ```
+  //       ?.replace(/\n```$/, "") // Remove closing ```
+
+  //     const parsedData = JSON.parse(rawJsonString ?? "")
+  //     const markdown = parsedData?.description?.replace(/\\n/g, "\n") // Replace escaped newlines
+
+  //     setPrDetails({
+  //       title: responseData?.data?.title,
+  //       description: markdown
+  //     })
+
+  //     fillPrForm(responseData?.data?.title, markdown)
+  //   } catch (error) {
+  //     console.error("Error generating title and description:", error)
+  //     throw error
+  //   }
+  // }
+
   const generateTitleDescription = async (
     commitMessages: string[],
     currentUrl: string,
@@ -80,29 +113,47 @@ function IndexPopup(): JSX.Element {
   ): Promise<void> => {
     try {
       const response = await axiosInstance.post(
-        `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
+        // `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
+        `http://localhost:4001/api/pr/generate-title-description`,
         JSON.stringify({ commits: commitMessages, currentUrl, username })
       )
 
-      const responseData = await response.data
-      console.log({ response: responseData })
+      const responseData = response.data
 
-      const rawJsonString = responseData?.data?.description
-        .replace(/^```json\n/, "") // Remove opening ```
-        .replace(/\n```$/, "") // Remove closing ```
+      // Normalize the response - handles all possible formats
+      const getCleanDescription = (desc: string): string => {
+        if (!desc) return ""
 
-      const parsedData = JSON.parse(rawJsonString)
-      const markdown = parsedData.description.replace(/\\n/g, "\n") // Replace escaped newlines
+        // Remove code block markers if present
+        desc = desc.replace(/^```(json)?\n/, "").replace(/\n```$/, "")
 
-      setPrDetails({
-        title: responseData?.data?.title,
-        description: markdown
-      })
+        // Try to parse as JSON if it looks like JSON
+        if (desc.trim().startsWith("{")) {
+          try {
+            const parsed = JSON.parse(desc)
+            return parsed.description || desc
+          } catch {}
+        }
 
-      fillPrForm(responseData?.data?.title, markdown)
+        return desc.replace(/\\n/g, "\n")
+      }
+
+      const title = responseData?.data?.title || "Feature Update"
+      const description = getCleanDescription(responseData?.data?.description)
+
+      setPrDetails({ title, description })
+      fillPrForm(title, description)
     } catch (error) {
       console.error("Error generating title and description:", error)
-      throw error
+      // Fallback to commit messages if API fails
+      setPrDetails({
+        title: "Feature Update",
+        description: `Changes:\n${commitMessages.map((c) => `- ${c}`).join("\n")}`
+      })
+      fillPrForm(
+        "Feature Update",
+        `Changes:\n${commitMessages.map((c) => `- ${c}`).join("\n")}`
+      )
     }
   }
 
