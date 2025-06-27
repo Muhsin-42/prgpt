@@ -10,6 +10,7 @@ import NotPrPageWarning from "~components/NotPrPageWarning"
 import { ThemeProvider } from "~components/ThemeContext"
 import axiosInstance from "~lib/axios-instance"
 import {
+  fetchChangedFilesFromPage,
   fetchCommitMessagesFromPage,
   fetchUsernameFromPage,
   fillPrForm
@@ -51,9 +52,15 @@ function IndexPopup(): JSX.Element {
     try {
       const commitMessages = await fetchCommitMessagesFromPage()
       const username = await fetchUsernameFromPage()
+      const changedFiles = await fetchChangedFilesFromPage()
 
       if (commitMessages.length > 0) {
-        await generateTitleDescription(commitMessages, currentUrl, username)
+        await generateTitleDescription(
+          commitMessages,
+          currentUrl,
+          username,
+          changedFiles
+        )
       } else {
         setPrDetails({
           title: "Could not generate title",
@@ -109,13 +116,19 @@ function IndexPopup(): JSX.Element {
   const generateTitleDescription = async (
     commitMessages: string[],
     currentUrl: string,
-    username: string | undefined
+    username: string | undefined,
+    changedFiles: string[]
   ): Promise<void> => {
     try {
       const response = await axiosInstance.post(
-        // `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
-        `http://localhost:4001/api/pr/generate-title-description`,
-        JSON.stringify({ commits: commitMessages, currentUrl, username })
+        `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
+        // `http://localhost:4001/api/pr/generate-title-description`,
+        JSON.stringify({
+          commits: commitMessages,
+          currentUrl,
+          username,
+          changedFiles
+        })
       )
 
       const responseData = response.data
