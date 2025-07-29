@@ -20,7 +20,7 @@
 
 ## 📹 Demo
 
-[![Demo Video](https://img.youtube.com/vi/BJMMA4f6jY4/0.jpg)](https://www.youtube.com/watch?v=BJMMA4f6jY4)
+[![Demo Video](https://github.com/user-attachments/assets/0674aaa2-c72f-454a-9c2e-fa1fb4317768)](https://www.youtube.com/watch?v=BJMMA4f6jY4)
 
 ## 🛠️ Tech Stack
 
