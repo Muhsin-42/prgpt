@@ -1,4 +1,3 @@
-// src/popup/index.tsx
 import React, { useEffect, useState } from "react"
 
 import "./style.css"
@@ -80,39 +79,6 @@ function IndexPopup(): JSX.Element {
     }
   }
 
-  // const generateTitleDescription = async (
-  //   commitMessages: string[],
-  //   currentUrl: string,
-  //   username: string | undefined
-  // ): Promise<void> => {
-  //   try {
-  //     const response = await axiosInstance.post(
-  //       `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
-  //       JSON.stringify({ commits: commitMessages, currentUrl, username })
-  //     )
-
-  //     const responseData = await response.data
-  //     console.log({ response: responseData })
-
-  //     const rawJsonString = responseData?.data?.description
-  //       ?.replace(/^```json\n/, "") // Remove opening ```
-  //       ?.replace(/\n```$/, "") // Remove closing ```
-
-  //     const parsedData = JSON.parse(rawJsonString ?? "")
-  //     const markdown = parsedData?.description?.replace(/\\n/g, "\n") // Replace escaped newlines
-
-  //     setPrDetails({
-  //       title: responseData?.data?.title,
-  //       description: markdown
-  //     })
-
-  //     fillPrForm(responseData?.data?.title, markdown)
-  //   } catch (error) {
-  //     console.error("Error generating title and description:", error)
-  //     throw error
-  //   }
-  // }
-
   const generateTitleDescription = async (
     commitMessages: string[],
     currentUrl: string,
@@ -121,8 +87,7 @@ function IndexPopup(): JSX.Element {
   ): Promise<void> => {
     try {
       const response = await axiosInstance.post(
-        `https://prgpt-api.onrender.com/api/pr/generate-title-description`,
-        // `http://localhost:4001/api/pr/generate-title-description`,
+        `http://82.25.108.216:1408/api/pr/generate-title-description`,
         JSON.stringify({
           commits: commitMessages,
           currentUrl,
