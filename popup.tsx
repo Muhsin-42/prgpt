@@ -29,6 +29,7 @@ function IndexPopup(): JSX.Element {
   })
   const [isGenerated, setIsGenerated] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [username, setUsername] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     checkCurrentTab()
@@ -51,6 +52,7 @@ function IndexPopup(): JSX.Element {
     try {
       const commitMessages = await fetchCommitMessagesFromPage()
       const username = await fetchUsernameFromPage()
+      setUsername(username)
       const changedFiles = await fetchChangedFilesFromPage()
 
       if (commitMessages.length > 0) {
@@ -150,6 +152,7 @@ function IndexPopup(): JSX.Element {
                 isLoading={isLoading}
                 prDetails={prDetails}
                 onGenerate={generatePr}
+                username={username}
               />
             )}
           </div>

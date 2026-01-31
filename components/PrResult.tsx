@@ -1,17 +1,19 @@
 import React from "react"
+import Testimonial from "./Testimonial"
 
 interface PrResultProps {
   onGenerate: () => void
+  username: string | undefined
 }
 
-const PrResult: React.FC<PrResultProps> = ({ onGenerate }) => {
+const PrResult: React.FC<PrResultProps> = ({ onGenerate, username }) => {
   return (
     <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-lg p-6 mx-5 my-6 text-center border border-gray-700">
       <h2 className="text-xl font-bold mb-3 text-purple-400">
         Pull Request Created 🎉
       </h2>
       <p className="text-sm text-gray-300 mb-6">
-        Your pull request has been successfully generated and placed on GitHub.
+        Your pull request has been successfully generated & placed
         <br />
         You can now close this extension.
       </p>
@@ -29,6 +31,8 @@ const PrResult: React.FC<PrResultProps> = ({ onGenerate }) => {
           Regenerate PR
         </button>
       </div>
+
+      <Testimonial username={username} />
 
       <p className="text-xs text-gray-500 mt-6">
         Powered by <span className="text-purple-400 font-semibold">PrGPT</span>{" "}
