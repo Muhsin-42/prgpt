@@ -87,7 +87,7 @@ function IndexPopup(): JSX.Element {
   ): Promise<void> => {
     try {
       const response = await axiosInstance.post(
-        `http://82.25.108.216:1408/api/pr/generate-title-description`,
+        `http://72.61.232.2:1408/api/pr/generate-title-description`,
         JSON.stringify({
           commits: commitMessages,
           currentUrl,
@@ -110,7 +110,7 @@ function IndexPopup(): JSX.Element {
           try {
             const parsed = JSON.parse(desc)
             return parsed.description || desc
-          } catch {}
+          } catch { }
         }
 
         return desc.replace(/\\n/g, "\n")

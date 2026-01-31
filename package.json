@@ -1,7 +1,7 @@
 {
   "name": "prgpt",
   "displayName": "Prgpt",
-  "version": "0.0.8",
+  "version": "0.0.11",
   "description": "PrGPT generates smart, concise pull request titles and descriptions from commits — no more dull summaries, just clear PRs.",
   "author": "Muhsin Abdul Nisar",
   "scripts": {
@@ -36,7 +36,6 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*",
       "https://github.com/*"
     ],
     "permissions": [
