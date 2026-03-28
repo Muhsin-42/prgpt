@@ -1,3 +1,7 @@
+import { initSentry } from "~lib/sentry"
+
+initSentry()
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "open-prgpt",

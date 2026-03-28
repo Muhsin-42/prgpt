@@ -14,6 +14,9 @@ import {
   fetchUsernameFromPage,
   fillPrForm
 } from "~lib/helpers"
+import { initSentry } from "~lib/sentry"
+
+initSentry()
 
 interface PrDetails {
   title: string
