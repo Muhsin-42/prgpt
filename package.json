@@ -1,7 +1,7 @@
 {
   "name": "prgpt",
   "displayName": "Prgpt",
-  "version": "0.0.6",
+  "version": "0.0.13",
   "description": "PrGPT generates smart, concise pull request titles and descriptions from commits — no more dull summaries, just clear PRs.",
   "author": "Muhsin Abdul Nisar",
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
+    "@sentry/react": "^10.38.0",
     "axios": "^1.8.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -36,11 +37,9 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*",
       "https://github.com/*"
     ],
     "permissions": [
-      "tabs",
       "activeTab",
       "scripting",
       "contextMenus"

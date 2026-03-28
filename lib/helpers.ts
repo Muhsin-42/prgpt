@@ -51,6 +51,54 @@ export const fetchCommitMessagesFromPage = (): Promise<string[]> => {
   })
 }
 
+export const fetchChangedFilesFromPage = (): Promise<string[]> => {
+  return new Promise((resolve, reject) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const tabId = tabs[0]?.id
+
+      if (!tabId) {
+        reject(new Error("Could not access the current tab."))
+        return
+      }
+
+      chrome.scripting.executeScript(
+        {
+          target: { tabId: tabId },
+          func: (): string[] => {
+            try {
+              // Find all file name elements
+              const fileElements = document.querySelectorAll<HTMLElement>(
+                ".Truncate a.Link--primary.Truncate-text"
+              )
+              const fileNames: string[] = []
+
+              // Extract the file name from each element
+              fileElements.forEach((element) => {
+                const fileName = element.textContent?.trim()
+                if (fileName) {
+                  fileNames.push(fileName)
+                }
+              })
+
+              return fileNames
+            } catch (error) {
+              console.error("Error fetching changed files:", error)
+              return []
+            }
+          }
+        },
+        (results) => {
+          if (results && results[0]?.result) {
+            resolve(results[0].result as string[])
+          } else {
+            resolve([])
+          }
+        }
+      )
+    })
+  })
+}
+
 export const fetchUsernameFromPage = (): Promise<string | undefined> => {
   return new Promise((resolve, reject) => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {

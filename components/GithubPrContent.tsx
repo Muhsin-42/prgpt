@@ -16,54 +16,58 @@ interface GithubPrContentProps {
   isLoading: boolean
   prDetails: PrDetails
   onGenerate: () => void
+  username: string | undefined
 }
 
 const GithubPrContent: React.FC<GithubPrContentProps> = ({
   isGenerated,
   isLoading,
   prDetails,
-  onGenerate
+  onGenerate,
+  username
 }) => {
   return (
     <div className="flex flex-col h-full !z-10">
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-2 px-5 pt-3">
-          GitHub Pull Request
-        </h3>
-        <p className="text-sm text-gray-400 dark:text-gray-400 px-5">
-          Generate a professional pull request title and description based on
-          your commit messages.
-        </p>
-      </div>
+
 
       {!isGenerated ? (
-        <div className="flex flex-col items-center justify-center py-8">
-          <div className="mb-6 text-center">
-            <svg
-              className="w-16 h-16 mx-auto mb-3 text-gray-400 dark:text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
-            </svg>
-
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Click generate to create a pull request with AI
+        <>
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold mb-2 px-5 pt-3">
+              GitHub Pull Request
+            </h3>
+            <p className="text-sm text-gray-400 dark:text-gray-400 px-5">
+              Generate professional PR title & description based on your commits
             </p>
           </div>
+          <div className="flex flex-col items-center justify-center py-8">
+            <div className="mb-6 text-center">
+              <svg
+                className="w-16 h-16 mx-auto mb-3 text-gray-400 dark:text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+              </svg>
 
-          <div className="mb-2">
-            <StarOnGithubBtn />
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Click generate to create a pull request with AI
+              </p>
+            </div>
+
+            <div className="mb-2">
+              <StarOnGithubBtn />
+            </div>
+            <GenerateButton onClick={onGenerate} isLoading={isLoading} />
           </div>
-          <GenerateButton onClick={onGenerate} isLoading={isLoading} />
-        </div>
+        </>
       ) : (
-        <PrResult />
+        <PrResult onGenerate={onGenerate} username={username} />
       )}
     </div>
   )
